@@ -2,6 +2,7 @@
   "name": "doctalker",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,11 +10,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@pinecone-database/pinecone": "^2.0.1",
     "autoprefixer": "10.4.17",
+    "aws-sdk": "^2.1548.0",
+    "formidable": "^3.5.1",
+    "formidable-serverless": "^1.1.1",
+    "mongoose": "^8.1.1",
     "next": "14.1.0",
+    "openai": "^4.26.0",
+    "pdfjs-dist": "^2.16.105",
     "postcss": "8.4.33",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.0.1",
+    "slugify": "^1.6.6",
+    "swr": "^2.2.4",
     "tailwindcss": "3.4.1"
   }
 }
