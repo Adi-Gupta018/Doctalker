@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { trusted } from 'mongoose'
 
 const Schema = mongoose.Schema;
 
@@ -21,10 +21,11 @@ const MyFileSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  vectorIndex: {
+  vectorNamespace: {
     type: String,
     maxLength: 100,
     required: false,
+    unique:true,
   },
 }, {
   timestamps: true,
