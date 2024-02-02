@@ -4,6 +4,13 @@ import MyFileModel from "@/src/models/MyFile";
 import formidable from "formidable";
 import { Pinecone } from "@pinecone-database/pinecone";
 
+
+export const config = {
+  api:{
+    bodyParser: false, // Disabling the builtin middleware for parsing bodies
+  }
+}
+
 export default async function handler(req, res) {
   // 1 only post method is allowed
   if (req.method != "POST") {
@@ -43,7 +50,7 @@ export default async function handler(req, res) {
       if (res) {
         console.log("pinecone Initialised");
       }
-      
+
       // save file in mongo db
       const myFile = new MyFileModel({
         fileName: file.name,

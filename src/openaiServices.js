@@ -17,7 +17,7 @@ export const getCompletion = async (prompt) => {
         model: "gpt-3.5-turbo-instruct",
         prompt: prompt, 
         temperature: 0,
-        max_tokens: 300, //TODO have to change it later
+        max_tokens: 500, //TODO have to change it later
       });
 
 	console.log(comp.choices[0].text.trim())
