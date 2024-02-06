@@ -1,32 +1,41 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import toast from "react-hot-toast";
+import useSWR, { mutate } from 'swr';
 
 export default function FileUpload() {
 	const [file, setFile] = useState();
 	const [uploading, setUploading] = useState(false)
 
-	const handleFileChange = (e) => {
-		if (e.target.files) {
-			let file = e.target.files[0]
+	useEffect(() => {
+        // This effect will run whenever the file state is updated
+        console.log('file', file);
+    }, [file]);
 
-			if (file.type !== 'application/pdf') {
+	const handleFileChange = (e) => {
+		console.log("handlefile change is called")
+		if (e.target.files) {
+			let ufile = e.target.files[0]
+			console.log(ufile, ufile.type);
+			if (ufile.type !== 'application/pdf') {
 				toast.error('Only PDF files are allowed')
 				e.target.value = null
 				return
 			}
-			setFile(file);
+			setFile(ufile);
+			console.log("file",file);
 		}
-	};
+	}; 
+	
 
 	const handleUploadClick = async () => {
 		if (!file) {
 			return;
 		}
-
+		console.log("handleupload click is called")
 		setUploading(true)
 		const formData = new FormData();
 		formData.append('file', file);
-
+		console.log(formData);
 		// 👇 Uploading the file using the fetch API to the server
 		let response = await fetch('/api/upload', {
 			method: 'POST',
@@ -35,6 +44,8 @@ export default function FileUpload() {
 		if (response.ok) {
 			response = await response.json()
 			toast.success(response.message)
+
+			mutate('/api/my-files');
 		} else {
 			response = await response.json()
 			toast.error(response.message)
@@ -47,7 +58,7 @@ export default function FileUpload() {
 			<div>
 				<label
 					htmlFor="formFile"
-					className="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
+					className="mb-2 inline-block text-black"
 				>Upload a PDF File</label
 				>
 				<input
@@ -63,10 +74,11 @@ export default function FileUpload() {
 					type="button"
 					onClick={handleUploadClick}
 					disabled={uploading}
-					className="inline-block rounded bg-primary-main px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-sm transition duration-150 ease-in-out hover:bg-primary-dark hover:shadow-md focus:bg-primary-dark active:bg-primary-light disabled:bg-primary-light disabled:cursor-not-allowed">
+					className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
 					{uploading ? 'Please wait...' : 'Upload'}
 				</button>
 			</div>
 		</div>
 	)
 }
+

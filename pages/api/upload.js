@@ -3,7 +3,7 @@ import { s3Upload } from "@/src/s3services";
 import MyFileModel from "@/src/models/MyFile";
 import formidable from "formidable";
 import { Pinecone } from "@pinecone-database/pinecone";
-
+import slugify from "slugify";
 
 export const config = {
   api:{
@@ -22,39 +22,42 @@ export default async function handler(req, res) {
     await connectDB();
 
     // 3 parse the incoming file
-    let form = new formidable.IncomingForm();
+    const form = formidable({});
     form.parse(req, async (error, fields, files) => {
       if (error) {
         console.log("failed to parse data");
         return res.status(500).json({ message: error });
       }
-
       const file = files.file;
+      // console.log(file);
+      // console.log(file[0].filepath);
       if (!file) {
         res.status(400).json({ message: "No file uploaded" });
       }
       //4 upload the file to aws
       let data = await s3Upload(process.env.S3_BUCKET, file);
 
-      const filenameWithoutExt = file.name.split(".")[0];
+      const filenameWithoutExt = file[0].originalFilename.split(".")[0];
       const filenameSlug = slugify(filenameWithoutExt, {
         lower: true,
         strict: true,
       });
-
+      console.log(filenameSlug);
+      console.log("data",data);
+      console.log("file",file);
       //5 initialise pinecone
       const pc = new Pinecone({
         apiKey: process.env.PDB_KEY,
       });
-      const res = await pc.listIndexes();
-      if (res) {
+      const PineconeRes = await pc.listIndexes();
+      if (PineconeRes) {
         console.log("pinecone Initialised");
       }
 
       // save file in mongo db
       const myFile = new MyFileModel({
-        fileName: file.name,
-        fileUrl: data.Location,
+        fileName: file[0].originalFilename,
+        fileUrl: `https://doctalker.s3.ap-south-1.amazonaws.com/${file[0].originalFilename}`,
         vectorNamespace: filenameSlug,
       });
       await myFile.save();

@@ -9,7 +9,6 @@ import Head from 'next/head'
 export default function Home() {
 	const [activeFile, setActiveFile] = useState()
 	const {files, isError, isLoading} = useMyFiles()
-
 	if (isLoading) {
 		return <h1>Loading...</h1>
 	}
@@ -33,6 +32,7 @@ export default function Home() {
 							<div>
 								<Intro/>
 								<FileUpload/>
+								{console.log(activeFile)};
 								<MyFiles setActiveFile={setActiveFile} files={files}/>
 							</div>
 							<div>

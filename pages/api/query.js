@@ -54,8 +54,8 @@ export default async function handler(req, res) {
     const prompt = `${promptStart} ${contexts} ${promptEnd}`;
 
     // get the response from the completion model
-    let response = await getCompletion(prompt);
-
+    const response = await getCompletion(prompt);
+    console.log("response from openAi",response);
     res.status(200).json({response});
 
   } catch (error) {

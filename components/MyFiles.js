@@ -2,6 +2,8 @@ import {useState} from "react";
 
 
 export default function MyFiles({setActiveFile, files}) {
+	console.log("MyFiles.js");
+	console.log(files);
 	return (
 		<div className={"border"}>
 			<div className={"bg-[#108dc7] text-primary-contrastText p-1 px-3"}>My Files</div>
