@@ -1,3 +1,4 @@
+"use client"
 import * as PDFJS from "pdfjs-dist/legacy/build/pdf";
 import { connectDB } from "@/src/db";
 import MyFileModel from "@/src/models/MyFile";
