@@ -2,8 +2,8 @@ import {useState} from "react";
 
 
 export default function MyFiles({setActiveFile, files}) {
-	console.log("MyFiles.js");
-	console.log(files);
+	// console.log("MyFiles.js");
+	// console.log(files);
 	// check if files is undefined or empty
 	if (!files || files.length === 0) {
 		return <div>No files to display</div>;

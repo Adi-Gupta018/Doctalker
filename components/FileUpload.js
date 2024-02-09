@@ -6,24 +6,24 @@ export default function FileUpload() {
 	const [file, setFile] = useState();
 	const [uploading, setUploading] = useState(false)
 
-	useEffect(() => {
-        // This effect will run whenever the file state is updated
-        console.log('file', file);
-    }, [file]);
+	// useEffect(() => {
+    //     // This effect will run whenever the file state is updated
+    //     console.log('file', file);
+    // }, [file]);
 
 	const handleFileChange = (e) => {
-		console.log("handlefile change is called")
+		// console.log("handlefile change is called")
 		if (e.target.files) {
 			let ufile = e.target.files[0]
-			console.log(ufile);
-			console.log(ufile.type);
+			// console.log(ufile);
+			// console.log(ufile.type);
 			if (ufile.type !== 'application/pdf') {
 				toast.error('Only PDF files are allowed')
 				e.target.value = null
 				return
 			}
 			setFile(ufile);
-			console.log("file",file);
+			// console.log("file",file);
 		}
 	}; 
 	
@@ -32,11 +32,11 @@ export default function FileUpload() {
 		if (!file) {
 			return;
 		}
-		console.log("handleupload click is called")
+		// console.log("handleupload click is called")
 		setUploading(true)
 		const formData = new FormData();
 		formData.append('file', file);
-		console.log(formData);
+		// console.log(formData);
 		// 👇 Uploading the file using the fetch API to the server
 		let response = await fetch('/api/upload', {
 			method: 'POST',
