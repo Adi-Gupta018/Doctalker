@@ -35,16 +35,23 @@ export default async function handler(req, res) {
         res.status(400).json({ message: "No file uploaded" });
       }
       //4 upload the file to aws
-      let data = await s3Upload(process.env.S3_BUCKET, file);
+      let data;
+      try {
+        data = await s3Upload(process.env.S3_BUCKET, file);
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Failed to upload file to S3" });
+      }
+      
 
       const filenameWithoutExt = file[0].originalFilename.split(".")[0];
       const filenameSlug = slugify(filenameWithoutExt, {
         lower: true,
         strict: true,
       });
-      console.log(filenameSlug);
-      console.log("data",data);
-      console.log("file",file);
+      // console.log(filenameSlug);
+      // console.log("data",data);
+      // console.log("file",file);
       //5 initialise pinecone
       const pc = new Pinecone({
         apiKey: process.env.PDB_KEY,
@@ -60,11 +67,27 @@ export default async function handler(req, res) {
         fileUrl: `https://doctalker.s3.ap-south-1.amazonaws.com/${file[0].originalFilename}`,
         vectorNamespace: filenameSlug,
       });
-      await myFile.save();
-      res.status(200).json({ message: "File uploaded" });
+
+      
+      try {
+        await myFile.save();
+        res.status(200).json({ message: "File uploaded" });
+      } catch (err) {
+        if (err.code === 11000) {
+          return res
+            .status(400)
+            .json({ message: "File with the same name already exists" });
+        }
+        // Send generic error response
+        res.status(500).json({ error: err.message });
+      
+      }
+
+      
+      
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ error });
   }
 }

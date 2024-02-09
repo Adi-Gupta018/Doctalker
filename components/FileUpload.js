@@ -15,7 +15,8 @@ export default function FileUpload() {
 		console.log("handlefile change is called")
 		if (e.target.files) {
 			let ufile = e.target.files[0]
-			console.log(ufile, ufile.type);
+			console.log(ufile);
+			console.log(ufile.type);
 			if (ufile.type !== 'application/pdf') {
 				toast.error('Only PDF files are allowed')
 				e.target.value = null
@@ -47,8 +48,10 @@ export default function FileUpload() {
 
 			mutate('/api/my-files');
 		} else {
+			setUploading(false)
 			response = await response.json()
 			toast.error(response.message)
+			
 		}
 		setUploading(false)
 	};

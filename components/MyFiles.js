@@ -4,6 +4,11 @@ import {useState} from "react";
 export default function MyFiles({setActiveFile, files}) {
 	console.log("MyFiles.js");
 	console.log(files);
+	// check if files is undefined or empty
+	if (!files || files.length === 0) {
+		return <div>No files to display</div>;
+	  }
+	
 	return (
 		<div className={"border"}>
 			<div className={"bg-[#108dc7] text-primary-contrastText p-1 px-3"}>My Files</div>
