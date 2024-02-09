@@ -4,7 +4,7 @@ import { connectDB } from "@/src/db";
 import MyFileModel from "@/src/models/MyFile";
 import { getEmbeddings } from "@/src/openaiServices";
 import { Pinecone } from "@pinecone-database/pinecone";
-import pdfjsWorker from "node_modules/pdfjs-dist/build/pdf.worker.entry";
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 export default async function handler(req, res) {
