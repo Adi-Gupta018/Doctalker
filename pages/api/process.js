@@ -10,7 +10,7 @@ import { Pinecone } from "@pinecone-database/pinecone";
 // PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 
-PDFJS.GlobalWorkerOptions.workerSrc= "src/pdf.worker.min.js";
+PDFJS.GlobalWorkerOptions.workerSrc= "pdfjs-dist/build/pdf.worker.min.js";
 
 export default async function handler(req, res) {
   // check for the post method
