@@ -1,9 +1,16 @@
 "use client"
-import * as PDFJS from "pdfjs-dist/legacy/build/pdf";
+import * as PDFJS from "pdfjs-dist";
 import { connectDB } from "@/src/db";
 import MyFileModel from "@/src/models/MyFile";
 import { getEmbeddings } from "@/src/openaiServices";
 import { Pinecone } from "@pinecone-database/pinecone";
+// import pdfjsWorker from "pdfjs-dist/legacy/build/pdf.worker.entry";
+
+// // Configure PDF.JS library to use the worker thread instead of a main thread
+// PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+
+
+PDFJS.GlobalWorkerOptions.workerSrc= "src/pdf.worker.min.js";
 
 export default async function handler(req, res) {
   // check for the post method
