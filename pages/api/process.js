@@ -4,13 +4,9 @@ import { connectDB } from "@/src/db";
 import MyFileModel from "@/src/models/MyFile";
 import { getEmbeddings } from "@/src/openaiServices";
 import { Pinecone } from "@pinecone-database/pinecone";
-// import pdfjsWorker from "pdfjs-dist/legacy/build/pdf.worker.entry";
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs"
 
-// // Configure PDF.JS library to use the worker thread instead of a main thread
-// PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
-
-PDFJS.GlobalWorkerOptions.workerSrc= "pdfjs-dist/build/pdf.worker.min.js";
+PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export default async function handler(req, res) {
   // check for the post method
