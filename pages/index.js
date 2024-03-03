@@ -40,7 +40,7 @@ export default function Home() {
           element: ".my-files",
           popover: {
             title: "Uploaded Files",
-            description: "View and select your uploaded files from here.",
+            description: "View and select your uploaded pdf files from here to chat.",
             side: "right",
             align: "middle",
           },
