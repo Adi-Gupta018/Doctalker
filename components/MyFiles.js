@@ -11,7 +11,7 @@ export default function MyFiles({setActiveFile, files}) {
 	
 	return (
 		<div className={"border"}>
-			<div className={"bg-[#108dc7] text-primary-contrastText p-1 px-3"}>My Files</div>
+			<div className={"bg-[#108dc7] text-primary-contrastText p-1 px-3"}>Select a pdf to chat</div>
 			{
 				files.map((file, index) => (
 					<button

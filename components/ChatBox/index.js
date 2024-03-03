@@ -84,7 +84,7 @@ export default function ChatBox({activeFile}) {
 			<div className={"flex flex-col border text-center py-1 bg-[#ef8e38] text-white"}>
 				{activeFile ? activeFile.fileName : "Choose a file to start chatting"}
 			</div>
-			<div className={"border p-3 grow flex flex-col justify-end h-[calc(100vh-270px)]"}>
+			<div className={"border p-3 grow flex flex-col justify-end h-[calc(100vh-300px)]"}>
 				{activeFile
 					? !activeFile.isProcessed
 						? <FileNotProcessedAlert id={activeFile._id}/>
