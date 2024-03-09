@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk'
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import fs from 'fs';
 
 // const s3 = new AWS.S3({
@@ -25,4 +25,13 @@ export const s3Upload = async(bucket,file) =>{
     })
 
     return await client.send(command);  //.promise so that await can be used
+}
+
+export const s3delete = async(bucket,key)=>{
+    const command = new DeleteObjectCommand({
+        Bucket: bucket,
+        Key:key,
+    })
+
+    return await client.send(command);
 }

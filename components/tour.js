@@ -29,7 +29,7 @@ export default function handleTourStart(){
           element: ".my-files",
           popover: {
             title: "Uploaded Files",
-            description: "View and select your uploaded pdf files from here to chat.",
+            description: "View, select or delete your uploaded pdf files from here to chat.",
             side: "right",
             align: "middle",
           },
