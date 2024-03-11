@@ -74,9 +74,9 @@ export default async function handler(req, res) {
 
       return res
         .status(200)
-        .json({ message: "file is processed successfully" });
+        .json({ message: "file is processed successfully, Happy chating :)" });
     }else{
-        return res.status(500).json({message:"error getting file contents"});
+        return res.status(500).json({message:"error getting file contents , please try again"});
     }
   } catch (error) {
     console.log(error);

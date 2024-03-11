@@ -142,7 +142,7 @@ export default async function handler(req, res) {
       console.log(myFile);
       try {
         await myFile.save();
-        return res.status(200).json({ message: "File uploaded" });
+        return res.status(200).json({ message: "File uploaded,go ahead & select it.", id: myFile._id });
       } catch (err) {
         console.log(err);
         if (err.code === 11000) {
