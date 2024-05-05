@@ -49,7 +49,7 @@ export default async function handler(req, res) {
         // 6. push to vector array
         vectors.push({
           id: `page${i + 1}`,
-          values: embedding,
+          values: embedding.values,
           metadata: {
             pageNum: i + 1,
             text,
@@ -57,7 +57,8 @@ export default async function handler(req, res) {
         });
       }
       // initialising pinecone and connectiong to the index
-
+      console.log(myFile.fileName);
+      if(!myFile.fileName.includes("EDP")){
       const pc = new Pinecone({
         apiKey: process.env.PDB_KEY,
       });
@@ -65,9 +66,21 @@ export default async function handler(req, res) {
       if (index) console.log("connected to the index");
 
       // upsert data in the namespace
-      const ns = index.namespace(myFile.vectorNamespace);
-      await ns.upsert(vectors);
+      // const ns = index.namespace(myFile.vectorNamespace);
+      // await ns.upsert(vectors);
+      await index.namespace(myFile.vectorNamespace).upsert(vectors);
+    }
+    else{
+      const pc = new Pinecone({
+        apiKey: process.env.PDB_EDP_KEY,
+      });
+      const index = pc.Index('edp');
+      const stats = await index.describeIndexStats();
+      console.log(stats);
+      if(index) console.log("connected to edp");
 
+      await index.upsert(vectors);
+    }
       // update mongodb isprocessed to true
       myFile.isProcessed = true;
       await myFile.save();
