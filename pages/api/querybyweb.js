@@ -8,6 +8,8 @@ async function connectToPinecone() {
   
     try {
       const index = pc.Index('edp');
+      const stats = await index.describeIndexStats();
+      console.log(stats);
       if (index) console.log("connected to the index");
       return index; // Return  index objects
     } catch (error) {
