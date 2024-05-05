@@ -37,6 +37,7 @@ export default function FileUpload() {
         toast.success(response.message,{duration:3000});
         mutate('/api/my-files');
       } else {
+        setUploading(false);
         const errorResponse = await response.json();
         toast.error(errorResponse.message,{duration:3000});
       }

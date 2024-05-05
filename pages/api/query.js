@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     // query the pinecone db
     const ns = index.namespace(myFile.vectorNamespace);
     let result = await ns.query({
-        vector: questionEmb,
+        vector: questionEmb.values,
 		topK: 5,
 		includeValues: true,
 		includeMetadata: true,
