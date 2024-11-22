@@ -1,5 +1,5 @@
 import Logo from "../ui/logo";
-import handleTourStart from "../tour";
+// import handleTourStart from "../tour";
 const Header = () => {
   return (
     <>
@@ -11,7 +11,7 @@ const Header = () => {
         >
           DocTalker
         </h1>
-        <div className="sm:flex gap-4 items-center">
+        {/* <div className="sm:flex gap-4 items-center">
           <button
             id="tourButton"
             onClick={handleTourStart}
@@ -19,19 +19,20 @@ const Header = () => {
           >
             Tour
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="sm:hidden bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] border-b-[0.5px] h-[54px] flex justify-between items-center px-6 border-b-white border-solid">
         <Logo isMobile={true} />
         <div className="flex justify-center items-baseline">
-        <button className="text-white bg-[#ef8e38] py-1 px-[22px] text-center text-lg font-normal  rounded-lg border-solid border-primary "
-        onClick={handleTourStart}>
+          <button
+            className="text-white bg-[#ef8e38] py-1 px-[22px] text-center text-lg font-normal  rounded-lg border-solid border-primary "
+            onClick={handleTourStart}
+          >
             Tour
           </button>
         </div>
       </div>
-     
     </>
   );
 };
