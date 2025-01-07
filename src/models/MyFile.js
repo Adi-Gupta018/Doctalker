@@ -14,7 +14,6 @@ const MyFileSchema = new Schema({
     type: String,
     required: [true, 'File Url is a required field.'],
     trim: true,
-    maxLength: 100,
     unique: true,
   },
   isProcessed: {
