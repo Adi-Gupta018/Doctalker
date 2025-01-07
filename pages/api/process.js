@@ -6,6 +6,8 @@ import { getEmbeddings } from "@/src/openaiServices";
 import { Pinecone } from "@pinecone-database/pinecone";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs"
 
+import { s3getfile } from "@/src/s3services";
+
 PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export default async function handler(req, res) {
@@ -33,6 +35,12 @@ export default async function handler(req, res) {
     let vectors = [];
 
     let myFiledata = await fetch(myFile.fileUrl);
+    // let myFiledata;
+    // try {
+    //   myFiledata = await
+    // } catch (error) {
+      
+    // }
 
     if (myFiledata.ok) {
       let pdfDoc = await PDFJS.getDocument(await myFiledata.arrayBuffer())
@@ -78,7 +86,6 @@ export default async function handler(req, res) {
       const stats = await index.describeIndexStats();
       console.log(stats);
       if(index) console.log("connected to edp");
-
       await index.upsert(vectors);
     }
       // update mongodb isprocessed to true
