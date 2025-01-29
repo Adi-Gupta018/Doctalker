@@ -33,7 +33,7 @@ export const getCompletion = async (prompt) => {
 
 	// console.log(comp.choices[0].text.trim())
 
-    const model = genAI.getGenerativeModel({model: "gemini-pro"});
+    const model = genAI.getGenerativeModel({model: "gemini-1.5-flash"});
     const result = await model.generateContent(prompt);
     console.log(result.response.text());
 
