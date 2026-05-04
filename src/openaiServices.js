@@ -15,7 +15,7 @@ export const getEmbeddings = async(text) =>{
     // });
     // return response?.data[0]?.embedding
 
-    const model = genAI.getGenerativeModel({ model: "embedding-001"});
+    const model = genAI.getGenerativeModel({ model: "gemini-embedding-2"});
     const result = await model.embedContent(text);
     const embedding = result.embedding;
    
@@ -33,7 +33,7 @@ export const getCompletion = async (prompt) => {
 
 	// console.log(comp.choices[0].text.trim())
 
-    const model = genAI.getGenerativeModel({model: "gemini-1.5-flash"});
+    const model = genAI.getGenerativeModel({model: "gemini-2.5-flash-lite"});
     const result = await model.generateContent(prompt);
     console.log(result.response.text());
 
