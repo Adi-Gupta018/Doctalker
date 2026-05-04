@@ -70,7 +70,7 @@ export default async function handler(req, res) {
       const pc = new Pinecone({
         apiKey: process.env.PDB_KEY,
       });
-      const index = pc.Index("doctalker");
+      const index = pc.Index("doctalker2");
       if (index) console.log("connected to the index");
 
       // upsert data in the namespace
